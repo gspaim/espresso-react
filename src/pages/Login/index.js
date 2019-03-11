@@ -1,13 +1,13 @@
 import React, { Component } from "react";
 import { FormLogin } from "./styles";
 import Api from "../../services/Api";
+import ReactDOM from "react-dom";
 
 export default class Login extends Component {
   state = {
     loading: false,
     userEmail: "",
     userPass: "",
-    userToken: "",
     loginError: false,
     loginMessageError: ""
   };
@@ -34,7 +34,6 @@ export default class Login extends Component {
       });
 
       this.setState({
-        userToken: response.authentication_token,
         loginError: false,
         loginMessageError: ""
       });

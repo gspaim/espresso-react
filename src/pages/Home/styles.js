@@ -7,8 +7,20 @@ export const Container = styled.div`
   padding-top: 60px;
 `;
 
+export const ContainerTitle = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 20px;
+  .title {
+    height: 55px;
+    padding: 0 20px;
+    color: #c9e9e5;
+    font-size: 24px;
+  }
+`;
+
 export const Form = styled.form`
-  margin-top: 20px;
   width: 100%;
   max-width: 800px;
   display: flex;
@@ -38,13 +50,5 @@ export const Form = styled.form`
     &:hover {
       background: #52d89f;
     }
-  }
-
-  .title {
-    flex: 2;
-    height: 55px;
-    padding: 0 20px;
-    color: white;
-    font-size: 18px;
   }
 `;
