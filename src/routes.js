@@ -4,6 +4,7 @@ import { isAuthenticated } from "./auth";
 import { BrowserRouter, Route, Switch, Redirect } from "react-router-dom";
 import Login from "./pages/Login";
 import Home from "./pages/Home";
+import Posts from "./pages/Posts";
 
 class PrivateRoute extends React.Component {
   state = {
@@ -54,6 +55,7 @@ const Routes = () => (
     <Switch>
       <Route exact path="/" component={Login} />
       <PrivateRoute path="/Home" component={Home} />
+      <PrivateRoute path="/Posts" component={Posts} />
     </Switch>
   </BrowserRouter>
 );

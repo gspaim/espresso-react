@@ -9,7 +9,7 @@ const TopicList = ({ topics }) => (
     {topics.map(topic => (
       <Topic key={topic.id}>
         <header>
-          <Link to="/" params={{ testvalue: "Hello" }}>
+          <Link to={{ pathname: "/Posts", state: { topic: topic } }}>
             <strong>{topic.title}</strong>
           </Link>
           <small>{topic.description}</small>

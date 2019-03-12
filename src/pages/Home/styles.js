@@ -12,12 +12,6 @@ export const ContainerTitle = styled.div`
   flex-direction: column;
   align-items: center;
   padding-top: 20px;
-  .title {
-    height: 55px;
-    padding: 0 20px;
-    color: #c9e9e5;
-    font-size: 24px;
-  }
 `;
 
 export const Form = styled.form`

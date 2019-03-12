@@ -9,7 +9,7 @@ export const Container = styled.div`
 
 export const Topic = styled.div`
   width: 300px;
-  background: #fff;
+  background: #d9dce9;
   border-radius: 3px;
   margin: 0 10px;
   display: flex;
