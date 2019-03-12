@@ -13,6 +13,8 @@ const GlobalStyle = createGlobalStyle`
     text-rendering: optimizeLegibility !important;
     -webkit-font-smoothing: antialiased !important;
     font-family: sans-serif;
+    height: 200vh;
+    
 
     .title {
       height: 55px;

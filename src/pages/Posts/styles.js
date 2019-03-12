@@ -5,6 +5,7 @@ export const Container = styled.div`
   flex-direction: column;
   justify-content: center;
   margin-top: 10px;
+  padding-bottom: 300px;
 
   .emptyTopic {
     padding: 50px;
@@ -20,19 +21,54 @@ export const ContainerTitle = styled.div`
   padding-top: 20px;
 `;
 
-export const PostList = styled.div`
-  width: 800px;
+export const Box = styled.form`
+  width: 700px;
   min-height: 200px;
+  position: fixed;
+  z-index: 1000;
+  bottom: 1rem;
   border-radius: 3px;
-  margin-top: 20px;
+  background-color: #d9dce9;
   display: flex;
   flex-direction: row;
-  background-color: #d9dce9;
-`;
 
-export const Post = styled.div`
-  width: 700px;
-  min-height: 50px;
-  max-height: 100px;
-  background-color: #f2f3f7;
+  textarea {
+    height: 80px;
+    padding: 20px;
+    background: #fff;
+    font-size: 18px;
+    color: #444;
+    border-radius: 3px;
+    border: ${props => (props.withError ? "2px solid #f00" : 0)};
+    width: 100%;
+    resize: none;
+
+    text-rendering: optimizeLegibility !important;
+    -webkit-font-smoothing: antialiased !important;
+    font-family: sans-serif;
+  }
+
+  button {
+    width: 100%;
+    height: 55px;
+    padding: 0 20px;
+    background: #56baae;
+    color: #fff;
+    border: 0;
+    font-size: 20px;
+    font-weight: bold;
+    border-radius: 3px;
+    &:hover {
+      background: #52d89f;
+      cursor: pointer;
+    }
+  }
+  ul {
+    list-style: none;
+    width: 100%;
+    li {
+      font-weight: bold;
+      padding: 12px 20px;
+    }
+  }
 `;

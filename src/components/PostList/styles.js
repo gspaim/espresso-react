@@ -17,30 +17,29 @@ export const ContainerTitle = styled.div`
 export const Post = styled.div`
   width: 700px;
   min-height: 50px;
-  max-height: 100px;
   background-color: #f2f3f7;
   border-radius: 3px;
-  margin: 0 10px;
   display: flex;
   padding: 20px;
-
+  margin-top: 10px;
   div {
     padding: 10px;
-    display: flex;
-    flex-direction: column;
     align-items: left;
     width: 100%;
+    word-wrap: break-word;
 
     .message {
-      font-size: 18px;
+      font-size: 16px;
     }
 
     footer {
+      padding-top: 10px;
       text-align: end;
 
       small {
         font-size: 14px;
         color: #666;
+        font-style: italic;
       }
     }
   }

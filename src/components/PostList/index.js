@@ -8,9 +8,12 @@ const PostList = ({ posts }) => (
     {posts.map(post => (
       <Post key={post.id}>
         <div>
-          <span className="message">{post.message}</span>
+          {post.message}
+
           <footer>
             <small>{moment(post.created_at).fromNow()}</small>
+            <br />
+            <small> by {post.user.name} </small>
           </footer>
         </div>
       </Post>
@@ -23,7 +26,8 @@ PostList.propTypes = {
     PropTypes.shape({
       id: PropTypes.number,
       message: PropTypes.string,
-      created_at: PropTypes.string
+      created_at: PropTypes.string,
+      name: PropTypes.string
     }).isRequired
   )
 };
