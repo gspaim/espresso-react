@@ -22,8 +22,6 @@ export default class Posts extends Component {
       topic: this.props.location.state.topic,
       posts: await this.getPosts(this.props.location.state.topic.id)
     });
-
-    console.log(this.state.posts);
   }
 
   getPosts = async topicId => {
@@ -80,8 +78,6 @@ export default class Posts extends Component {
           }
         };
 
-        console.log(postData);
-
         let axiosConfig = {
           headers: {
             "Content-Type": "application/json; charset=utf-8",
@@ -102,7 +98,6 @@ export default class Posts extends Component {
             posts: await this.getPosts(this.state.topic.id)
           });
         } catch (err) {
-          console.log(err);
           this.setState({
             postError: true
           });

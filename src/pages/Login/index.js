@@ -47,11 +47,10 @@ export default class Login extends Component {
 
       this.props.history.push(`/Home`);
     } catch (err) {
-      console.log(err);
       this.setState({
         loginError: true,
         loginMessageError:
-          "opss...usuário inválido, verifique o email ou senha :)"
+          "opss...usuário inválido, verifique o email e/ou senha :)"
       });
     } finally {
       this.setState({ loading: false });

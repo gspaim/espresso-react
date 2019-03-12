@@ -13,7 +13,9 @@ const TopicList = ({ topics }) => (
             <strong>{topic.title}</strong>
           </StyledLink>
           <small>{topic.description}</small>
-          <small>{moment(topic.created_at).fromNow()}</small>
+          <small className="endPosition">
+            {moment(topic.created_at).fromNow()}
+          </small>
         </header>
       </Topic>
     ))}

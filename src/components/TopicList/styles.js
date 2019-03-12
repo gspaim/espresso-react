@@ -21,6 +21,7 @@ export const Topic = styled.div`
     display: flex;
     flex-direction: column;
     align-items: left;
+    width: 100%;
 
     strong {
       font-size: 24px;
@@ -30,6 +31,10 @@ export const Topic = styled.div`
     small {
       font-size: 14px;
       color: #666;
+    }
+    .endPosition {
+      padding-top: 10px;
+      text-align: end;
     }
   }
 `;
