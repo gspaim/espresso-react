@@ -18,6 +18,8 @@ export default class Login extends Component {
     this.setState({
       loading: false
     });
+
+    await localStorage.setItem("@EspressoPosts:loginInfo", null);
   }
 
   handleLogin = async e => {

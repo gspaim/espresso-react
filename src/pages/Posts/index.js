@@ -29,25 +29,28 @@ export default class Posts extends Component {
   getPosts = async topicId => {
     this.setState({ loading: true });
 
-    const auth =
-      JSON.parse(await localStorage.getItem("@EspressoPosts:loginInfo")) || [];
+    const auth = JSON.parse(
+      await localStorage.getItem("@EspressoPosts:loginInfo")
+    );
 
-    const userEmail = auth[0].email;
-    const userToken = auth[0].authentication_token;
+    if (auth != null) {
+      const userEmail = auth[0].email;
+      const userToken = auth[0].authentication_token;
 
-    try {
-      const { data: response } = await Api.get(`posts/?by_topic=${topicId}`, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "X-User-Email": userEmail,
-          "X-User-Token": userToken
-        }
-      });
-      return response;
-    } catch (err) {
-      this.setState({ postError: true });
-    } finally {
-      this.setState({ loading: false });
+      try {
+        const { data: response } = await Api.get(`posts/?by_topic=${topicId}`, {
+          headers: {
+            "Content-Type": "multipart/form-data",
+            "X-User-Email": userEmail,
+            "X-User-Token": userToken
+          }
+        });
+        return response;
+      } catch (err) {
+        this.setState({ postError: true });
+      } finally {
+        this.setState({ loading: false });
+      }
     }
   };
 
@@ -61,49 +64,51 @@ export default class Posts extends Component {
     } else {
       this.setState({ loading: true });
 
-      const auth =
-        JSON.parse(await localStorage.getItem("@EspressoPosts:loginInfo")) ||
-        [];
+      const auth = JSON.parse(
+        await localStorage.getItem("@EspressoPosts:loginInfo")
+      );
 
-      const userEmail = auth[0].email;
-      const userToken = auth[0].authentication_token;
+      if (auth != null) {
+        const userEmail = auth[0].email;
+        const userToken = auth[0].authentication_token;
 
-      var postData = {
-        post: {
-          topic_id: this.state.topic.id,
-          message: this.state.newMessage,
-          imgUrl: ""
+        var postData = {
+          post: {
+            topic_id: this.state.topic.id,
+            message: this.state.newMessage,
+            imgUrl: ""
+          }
+        };
+
+        console.log(postData);
+
+        let axiosConfig = {
+          headers: {
+            "Content-Type": "application/json; charset=utf-8",
+            "X-User-Email": userEmail,
+            "X-User-Token": userToken
+          }
+        };
+
+        try {
+          const { data: response } = await Api.post(
+            `posts`,
+            postData,
+            axiosConfig
+          );
+
+          this.setState({
+            postError: false,
+            posts: await this.getPosts(this.state.topic.id)
+          });
+        } catch (err) {
+          console.log(err);
+          this.setState({
+            postError: true
+          });
+        } finally {
+          this.setState({ loading: false, newMessage: "" });
         }
-      };
-
-      console.log(postData);
-
-      let axiosConfig = {
-        headers: {
-          "Content-Type": "application/json; charset=utf-8",
-          "X-User-Email": userEmail,
-          "X-User-Token": userToken
-        }
-      };
-
-      try {
-        const { data: response } = await Api.post(
-          `posts`,
-          postData,
-          axiosConfig
-        );
-
-        this.setState({
-          postError: false,
-          posts: await this.getPosts(this.state.topic.id)
-        });
-      } catch (err) {
-        console.log(err);
-        this.setState({
-          postError: true
-        });
-      } finally {
-        this.setState({ loading: false, newMessage: "" });
       }
     }
   };
@@ -118,31 +123,33 @@ export default class Posts extends Component {
             <span className="title"> {topic.title} </span>
           </ContainerTitle>
           <Container>
-            <PostList posts={posts} />
-            <Box withError={postError} onSubmit={this.handlePost}>
-              <ul>
-                <li>
-                  <textarea
-                    type="text"
-                    placeholder="Nova Mensagem"
-                    value={newMessage}
-                    onChange={e =>
-                      this.setState({ newMessage: e.target.value })
-                    }
-                  />
-                </li>
+            <div>
+              <PostList posts={posts} />
+              <Box withError={postError} onSubmit={this.handlePost}>
+                <ul>
+                  <li>
+                    <textarea
+                      type="text"
+                      placeholder="Nova Mensagem"
+                      value={newMessage}
+                      onChange={e =>
+                        this.setState({ newMessage: e.target.value })
+                      }
+                    />
+                  </li>
 
-                <li>
-                  <button type="submit">
-                    {loading ? (
-                      <i className="fa fa-spinner fa-pulse" />
-                    ) : (
-                      "Postar"
-                    )}
-                  </button>
-                </li>
-              </ul>
-            </Box>
+                  <li>
+                    <button type="submit">
+                      {loading ? (
+                        <i className="fa fa-spinner fa-pulse" />
+                      ) : (
+                        "Postar"
+                      )}
+                    </button>
+                  </li>
+                </ul>
+              </Box>
+            </div>
           </Container>
         </Fragment>
       );
@@ -152,7 +159,6 @@ export default class Posts extends Component {
           <ContainerTitle>
             <span className="title"> {topic.title} </span>
           </ContainerTitle>
-
           <Container>
             <span className="emptyTopic">
               Sem posts no momento, go first? :D

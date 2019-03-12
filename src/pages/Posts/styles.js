@@ -11,6 +11,8 @@ export const Container = styled.div`
     padding: 50px;
     font-size: 18px;
     color: #fff;
+    min-width: 700px;
+    text-align: center;
   }
 `;
 
@@ -23,7 +25,6 @@ export const ContainerTitle = styled.div`
 
 export const Box = styled.form`
   width: 700px;
-  min-height: 200px;
   position: fixed;
   z-index: 1000;
   bottom: 1rem;

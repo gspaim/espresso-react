@@ -12,52 +12,72 @@ export default class Home extends Component {
     loading: false,
     topicError: false
   };
+  _isMounted = false;
+  auth = null;
 
   async componentDidMount() {
+    this._isMounted = true;
     this.setState({ loading: true });
 
-    this.setState({
-      loading: false,
-      topics: await this.getTopics()
-    });
+    const response = await this.getTopics();
+
+    if (this._isMounted) {
+      this.setState({
+        loading: false,
+        topics: response
+      });
+    }
+  }
+
+  componentWillUnmount() {
+    this._isMounted = false;
   }
 
   getTopics = async () => {
-    this.setState({ loading: true });
+    if (this._isMounted) {
+      this.setState({ loading: true });
 
-    const auth =
-      JSON.parse(await localStorage.getItem("@EspressoPosts:loginInfo")) || [];
+      this.auth = JSON.parse(
+        await localStorage.getItem("@EspressoPosts:loginInfo")
+      );
 
-    const userEmail = auth[0].email;
-    const userToken = auth[0].authentication_token;
+      if (this.auth != null) {
+        const userEmail = this.auth[0].email;
+        const userToken = this.auth[0].authentication_token;
 
-    try {
-      const { data: response } = await Api.get(`topics`, {
-        headers: {
-          "Content-Type": "multipart/form-data",
-          "X-User-Email": userEmail,
-          "X-User-Token": userToken
+        try {
+          const { data: response } = await Api.get(`topics`, {
+            headers: {
+              "Content-Type": "multipart/form-data",
+              "X-User-Email": userEmail,
+              "X-User-Token": userToken
+            }
+          });
+          return response;
+        } catch (err) {
+          this.setState({ topicError: true });
+        } finally {
+          this.setState({ loading: false });
         }
-      });
-      return response;
-    } catch (err) {
-      this.setState({ topicError: true });
-    } finally {
-      this.setState({ loading: false });
+      }
     }
   };
 
   render() {
-    const { loading, topics } = this.state;
-    return (
-      <Fragment>
-        <ContainerTitle>
-          <span className="title"> Tópicos </span>
-        </ContainerTitle>
-        <Container>
-          <TopicList topics={topics} />
-        </Container>
-      </Fragment>
-    );
+    const { topics } = this.state;
+    if (this.auth != null) {
+      return (
+        <Fragment>
+          <ContainerTitle>
+            <span className="title"> Tópicos </span>
+          </ContainerTitle>
+          <Container>
+            <TopicList topics={topics} />
+          </Container>
+        </Fragment>
+      );
+    } else {
+      return <Fragment />;
+    }
   }
 }

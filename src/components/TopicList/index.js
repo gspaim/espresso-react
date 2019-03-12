@@ -1,6 +1,6 @@
 import React from "react";
 import PropTypes from "prop-types";
-import { Container, Topic } from "./styles";
+import { Container, Topic, StyledLink } from "./styles";
 import moment from "moment";
 import { Link } from "react-router-dom";
 
@@ -9,9 +9,9 @@ const TopicList = ({ topics }) => (
     {topics.map(topic => (
       <Topic key={topic.id}>
         <header>
-          <Link to={{ pathname: "/Posts", state: { topic: topic } }}>
+          <StyledLink to={{ pathname: "/Posts", state: { topic: topic } }}>
             <strong>{topic.title}</strong>
-          </Link>
+          </StyledLink>
           <small>{topic.description}</small>
           <small>{moment(topic.created_at).fromNow()}</small>
         </header>
