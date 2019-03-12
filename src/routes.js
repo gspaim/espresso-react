@@ -11,8 +11,8 @@ class PrivateRoute extends React.Component {
     loading: true,
     isAuthenticated: false
   };
-  componentDidMount() {
-    isAuthenticated().then(isAuthenticated => {
+  async componentDidMount() {
+    await isAuthenticated().then(isAuthenticated => {
       this.setState({
         loading: false,
         isAuthenticated
