@@ -2,7 +2,7 @@ import axios from "axios";
 
 const api = axios.create({
   //production
-  baseURL: "https://dry-sierra-90931.herokuapp.com/api/v1/"
+  baseURL: "https://espresso-api.herokuapp.com//api/v1/"
 
   //development/test
   //baseURL: "http://localhost:3002/api/v1/"
